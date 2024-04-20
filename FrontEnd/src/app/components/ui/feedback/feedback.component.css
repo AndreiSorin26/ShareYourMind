@@ -1,0 +1,32 @@
+.label
+{
+    display: inline-block;
+    margin-right: 1vh;
+}
+
+nz-date-picker, button, nz-select
+{
+    margin-right: 1vh;
+}
+
+nz-select
+{
+    width: 30vh;
+}
+
+.percentage-metric
+{
+    display: inline-block;
+    margin-right: 1vh;
+}
+
+.in-block
+{
+    display: inline-block;
+}
+
+.spaced-items
+{
+    display: flex;
+    justify-content: space-between;
+}

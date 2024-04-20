@@ -1,0 +1,14 @@
+.content
+{
+    width: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+nz-input-group
+{
+    margin-bottom: 1vh;
+    border-radius: 10px;
+}

@@ -1,0 +1,14 @@
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\bin\Debug\net8.0\Database.deps.json
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\bin\Debug\net8.0\Database.runtimeconfig.json
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\bin\Debug\net8.0\Database.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\bin\Debug\net8.0\Database.pdb
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.csproj.AssemblyReference.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.AssemblyInfoInputs.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.AssemblyInfo.cs
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.csproj.CoreCompileInputs.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\refint\Database.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.pdb
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\Database.genruntimeconfig.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Database\obj\Debug\net8.0\ref\Database.dll

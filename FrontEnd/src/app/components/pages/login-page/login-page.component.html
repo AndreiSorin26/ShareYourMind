@@ -1,0 +1,26 @@
+<div class="content">
+
+    <nz-input-group [nzPrefix]="userIconPrefixTemplate">
+        <ng-template #userIconPrefixTemplate><span nz-icon nzType="user"></span></ng-template>
+        <input type="text" nz-input placeholder="Enter your username" [(ngModel)]="loginRequest.displayName"/>
+    </nz-input-group>
+
+    <br/>
+
+    <nz-input-group [nzSuffix]="passwordVisibleEyeIconSuffixTemplate">
+        <ng-template #passwordVisibleEyeIconSuffixTemplate>
+            <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible">
+            </span>
+        </ng-template>
+        <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Enter your password" [(ngModel)]="loginRequest.password"/>
+    </nz-input-group>
+
+    <br/>
+
+    <button nz-button nzType="primary" nzShape="round" (click)="sendLoginRequest()" [nzLoading]="processingLoginRequest">
+        <span nz-icon nzType="login"></span>
+        Log In
+    </button>
+    <a nz-button nzType="link" href="/signup"> Sign Up </a>
+
+</div>

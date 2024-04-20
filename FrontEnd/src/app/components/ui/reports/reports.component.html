@@ -1,0 +1,50 @@
+<nz-list nzItemLayout="horizontal" [nzLoading]="fetchingReports">
+    @for (report of reports; track report)
+    {
+        <nz-list-item>
+            <p>
+                User {{report.reportingUserDisplayName}} reported post with ID <a nz-button nzType="text" (click)="loadPost(report.postId)">{{report.postId}}</a>
+                at {{report.createdAt | date: 'dd MMMM, yyyy'}} for reason: {{report.text}}
+            </p>
+            <button  nz-popconfirm nzPopconfirmTitle="Delete confirmation" nzPopconfirmPlacement="top" (nzOnConfirm)="deletePost(report.postId)"
+                     nz-button nzType="primary" nzShape="round" nzDanger>
+                Delete
+            </button>
+
+            <button  nz-popconfirm nzPopconfirmTitle="Close confirmation" nzPopconfirmPlacement="top" (nzOnConfirm)="closeReport(report.id)"
+                     nz-button nzType="primary" nzShape="round">
+                Close
+            </button>
+        </nz-list-item>
+    }
+    @if (reports.length === 0)
+    {
+        <nz-list-empty />
+    }
+</nz-list>
+
+<nz-modal nzCentered [nzFooter]="null"
+          (nzOnCancel)="postModalVisible = false"
+          [(nzVisible)]="postModalVisible" nzTitle="Post">
+    <ng-container *nzModalContent>
+        <nz-list nzItemLayout="vertical">
+            <nz-list-item>
+                <nz-list-item-meta>
+                    <nz-list-item-meta-avatar nzSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLHz0vltSz4jyrQ5SmjyKiVAF-xjpuoHcCw&usqp=CAU"></nz-list-item-meta-avatar>
+                    <nz-list-item-meta-title>
+                        <a href="">{{post?.posterDisplayName}}</a>
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-description>
+                        {{ post?.createdAt | date: 'dd MMMM, yyyy' }}
+                    </nz-list-item-meta-description>
+                </nz-list-item-meta>
+                {{ post?.text }}
+                <br/>
+
+                <nz-list-item-extra>
+                    <img width="1" height="1" alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png" />
+                </nz-list-item-extra>
+            </nz-list-item>
+        </nz-list>
+    </ng-container>
+</nz-modal>

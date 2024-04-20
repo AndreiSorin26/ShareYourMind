@@ -1,0 +1,58 @@
+<div class="content">
+
+    @if(user)
+    {
+        <nz-tabset nzCentered>
+
+            @if(user.role === 'Admin')
+            {
+                <nz-tab [nzTitle]="adminTitleTemplate">
+                    <ng-template #adminTitleTemplate>
+                        <span nz-icon nzType="laptop" nzTheme="outline"></span>
+                        Admin Requests
+                    </ng-template>
+
+                    <app-admin-requests></app-admin-requests>
+                </nz-tab>
+
+                <nz-tab [nzTitle]="reportsTitleTemplate">
+                    <ng-template #reportsTitleTemplate>
+                        <span nz-icon nzType="warning" nzTheme="outline"></span>
+                        Reports
+                    </ng-template>
+
+                    <app-reports></app-reports>
+                </nz-tab>
+            }
+
+            <nz-tab [nzTitle]="feedTitleTemplate">
+                <ng-template #feedTitleTemplate>
+                    <span nz-icon nzType="layout" nzTheme="outline"></span>
+                    Feed
+                </ng-template>
+
+                <app-feed [user]="user"></app-feed>
+            </nz-tab>
+
+            <nz-tab [nzTitle]="profileTitleTemplate">
+                <ng-template #profileTitleTemplate>
+                    <span nz-icon nzType="user" nzTheme="outline"></span>
+                    Profile
+                </ng-template>
+
+                <app-profile [user]="user"></app-profile>
+            </nz-tab>
+
+            <nz-tab [nzTitle]="feedbackTitleTemplate">
+                <ng-template #feedbackTitleTemplate>
+                    <span nz-icon nzType="notification" nzTheme="outline"></span>
+                    Feedback
+                </ng-template>
+
+                <app-feedback [user]="this.user"></app-feedback>
+            </nz-tab>
+
+        </nz-tabset>
+    }
+
+</div>

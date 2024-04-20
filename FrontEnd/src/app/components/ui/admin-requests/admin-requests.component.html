@@ -1,0 +1,21 @@
+<nz-list nzItemLayout="horizontal" [nzLoading]="loadingRequests">
+    @for (newAdmin of newAdmins; track newAdmin)
+    {
+        <nz-list-item>
+            <nz-list-item-meta [nzDescription]="(newAdmin.createdAt | date)!">
+                <nz-list-item-meta-title>
+                    <p>
+                        {{newAdmin.displayName}} has requested to be an admin.
+                    </p>
+                </nz-list-item-meta-title>
+            </nz-list-item-meta>
+            <button nz-button nzType="primary" nzShape="circle" (click)="approveAdminRequest(newAdmin)">
+                <span nz-icon nzType="check-circle"></span>
+            </button>
+        </nz-list-item>
+    }
+    @if (newAdmins.length === 0)
+    {
+        <nz-list-empty />
+    }
+</nz-list>

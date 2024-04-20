@@ -1,0 +1,176 @@
+<div>
+    @if(!ownPosts)
+    {
+        <textarea class="post-txt" rows="6" nz-input [(ngModel)]="newPostText"></textarea>
+        <button class="post-btn" nz-button nzType="primary" nzShape="round" [nzLoading]="uploadingPost" (click)="uploadPost()">
+            <span nz-icon nzType="file-add" nzTheme="outline"></span>
+            Post
+        </button>
+
+        <nz-divider></nz-divider>
+    }
+
+    <nz-list nzItemLayout="vertical">
+        @if(posts.length == 0 && !loadingPosts)
+        {
+            <nz-list-empty></nz-list-empty>
+        }
+        @else if (posts.length == 0 && loadingPosts)
+        {
+            <app-loading-spinner></app-loading-spinner>
+        }
+        @else
+        {
+            @for (post of posts; track post)
+            {
+                <nz-list-item>
+                    <nz-list-item-meta>
+                        <nz-list-item-meta-avatar nzSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLHz0vltSz4jyrQ5SmjyKiVAF-xjpuoHcCw&usqp=CAU"></nz-list-item-meta-avatar>
+                        <nz-list-item-meta-title>
+                            <a href="">{{post.posterDisplayName}}</a>
+                        </nz-list-item-meta-title>
+                        <nz-list-item-meta-description>
+                            {{ post.createdAt | date: 'dd MMMM, yyyy' }}
+                        </nz-list-item-meta-description>
+                    </nz-list-item-meta>
+
+                    <p>
+                        {{ post.text }}
+                    </p>
+
+                    <button nz-button nzType="default" nzShape="circle" (click)="handlePostReaction(post, 'Love')">
+                        <span nz-icon nzType="heart" [nzTheme]="isOwnPostReaction(post, 'Love') ? 'fill' : 'outline'"></span>
+                    </button>
+                    {{post.loveReactionCount}}
+
+                    <button nz-button nzType="default" nzShape="circle" (click)="handlePostReaction(post, 'Laugh')">
+                        <span nz-icon nzType="smile" [nzTheme]="isOwnPostReaction(post, 'Laugh') ? 'fill' : 'outline'"></span>
+                    </button>
+                    {{post.laughReactionCount}}
+
+                    <button nz-button nzType="default" nzShape="circle" (click)="handlePostReaction(post, 'Dislike')">
+                        <span nz-icon nzType="dislike" [nzTheme]="isOwnPostReaction(post, 'Dislike') ? 'fill' : 'outline'"></span>
+                    </button>
+                    {{post.dislikeReactionCount}}
+
+                    <nz-divider nzType="vertical"></nz-divider>
+
+                    <button nz-button nzType="default" nzShape="circle" (click)="openComments(post)">
+                        <span nz-icon nzType="message" nzTheme="outline"></span>
+                    </button>
+
+                    @if(user?.role !== "Admin")
+                    {
+                        <nz-divider nzType="vertical"></nz-divider>
+
+                        <button nz-button nzType="default" nzShape="circle" nz-popover nzPopoverTitle="Actions" [nzPopoverContent]="actionsMenu" nzPopoverPlacement="topRight">
+                            <span nz-icon nzType="ellipsis" nzTheme="outline" [nzRotate]="90"></span>
+                        </button>
+
+                        <ng-template #actionsMenu>
+                            <div>
+                                <a nz-button nzType="text" (click)="openReport(post)">Report</a>
+
+                                @if(editablePosts)
+                                {
+                                    <br/>
+                                    <a nz-button nzType="text" (click)="openPostForEdit(post)">Edit</a>
+                                    <br>
+                                    <a nz-button nzType="text" (click)="deletePost(post)">Delete</a>
+                                }
+                            </div>
+                        </ng-template>
+                    }
+
+                    <nz-list-item-extra>
+                        <img width="1" height="1" alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png" />
+                    </nz-list-item-extra>
+                </nz-list-item>
+            }
+        }
+    </nz-list>
+
+    @if(!loadingPosts)
+    {
+        <nz-divider></nz-divider>
+    }
+
+    <a nz-button nzType="text" (click)="loadMorePosts()">
+        @if(loadingPosts && posts.length > 0)
+        {
+            <app-loading-spinner></app-loading-spinner>
+        }
+        @else if (posts.length > 0)
+        {
+            Load more...
+        }
+    </a>
+</div>
+
+<nz-modal nzCentered [nzFooter]="null" (nzOnCancel)="commentModalVisible = false" [(nzVisible)]="commentModalVisible" nzTitle="Comments">
+    <ng-container *nzModalContent>
+        <div class="scrollable">
+            <textarea class="post-txt" rows="6" nz-input [(ngModel)]="newCommentText"></textarea>
+            <button class="post-btn" nz-button nzType="primary" nzShape="round" [nzLoading]="uploadingComment" (click)="uploadComment()">
+                <span nz-icon nzType="file-add" nzTheme="outline"></span>
+                Post
+            </button>
+
+
+            @if(loadingComments)
+            {
+                <app-loading-spinner></app-loading-spinner>
+            }
+            @else
+            {
+                <nz-list nzItemLayout="vertical">
+                    @if(comments.length == 0)
+                    {
+                        <nz-list-empty></nz-list-empty>
+                    }
+                    @else
+                    {
+                        @for (comment of comments; track comment)
+                        {
+                            <nz-list-item>
+                                <nz-list-item-meta>
+                                    <nz-list-item-meta-avatar nzSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLHz0vltSz4jyrQ5SmjyKiVAF-xjpuoHcCw&usqp=CAU"></nz-list-item-meta-avatar>
+                                    <nz-list-item-meta-title>
+                                        <a href="">{{comment.posterDisplayName}}</a>
+                                    </nz-list-item-meta-title>
+                                    <nz-list-item-meta-description>
+                                        {{ comment.createdAt | date: 'dd MMMM, yyyy' }}
+                                    </nz-list-item-meta-description>
+                                </nz-list-item-meta>
+                                {{ comment.text }}
+                                <br/>
+                                <nz-list-item-extra>
+                                    <img width="1" height="1" alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png" />
+                                </nz-list-item-extra>
+                            </nz-list-item>
+                        }
+                    }
+                </nz-list>
+            }
+        </div>
+    </ng-container>
+</nz-modal>
+
+<nz-modal nzCentered
+          (nzOnCancel)="cancelReport()" (nzOnOk)="sendReport()"
+          [nzOkLoading]="uploadingReport"
+          [(nzVisible)]="reportModalVisible" nzTitle="Report Reason">
+    <ng-container *nzModalContent>
+        <textarea class="post-txt" rows="6" nz-input [(ngModel)]="newReportText"></textarea>
+    </ng-container>
+</nz-modal>
+
+<nz-modal nzCentered
+          (nzOnCancel)="editPostModalVisible = false"
+          (nzOnOk)="saveEditedPost()"
+          [nzOkLoading]="savingEditedPost"
+          [(nzVisible)]="editPostModalVisible" nzTitle="Edit post">
+    <ng-container *nzModalContent>
+        <textarea class="post-txt" rows="6" nz-input [(ngModel)]="selectedPostForEdit!.text"></textarea>
+    </ng-container>
+</nz-modal>

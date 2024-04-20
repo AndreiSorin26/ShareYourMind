@@ -1,0 +1,111 @@
+@if(user)
+{
+    <button nz-button nzType="primary" nzShape="round" (click)="logout()">
+        <span nz-icon nzType="left"></span>
+        Log out
+    </button>
+
+    <br/>
+    <br/>
+
+    <nz-input-group [nzPrefix]="usernamePrefixTemplate">
+        <ng-template #usernamePrefixTemplate><span nz-icon nzType="user"></span></ng-template>
+
+        <input type="text" nz-input placeholder="Enter your username" [(ngModel)]="user.username" disabled/>
+    </nz-input-group>
+
+    <br/> <br/>
+
+    <nz-input-group nzPrefix="#">
+        <input type="text" nz-input placeholder="Enter your tag" [(ngModel)]="user.tag" disabled/>
+    </nz-input-group>
+
+    <nz-divider></nz-divider>
+
+    <nz-input-group nzCompact>
+        <input type="text" nz-input placeholder="Enter username" [(ngModel)]="receiverUsername" style="width:50%;" />
+        <nz-input-number [nzMin]="0" [nzMax]="99999" [nzPlaceHolder]="'Enter tag'" [(ngModel)]="receiverTag"></nz-input-number>
+        <button nz-button nzType="primary" nzSearch (click)="sendFriendRequest()" [nzLoading]="">
+            <span nz-icon nzType="arrow-right" nzTheme="outline"></span>
+        </button>
+    </nz-input-group>
+
+    <div>
+        <nz-tabset>
+            <nz-tab nzTitle="Pending">
+                <nz-list nzBordered nzHeader="Friend Requests">
+                    @if (filterPendingFriendRequests().length === 0)
+                    {
+                        <nz-list-empty />
+                    }
+                    @else
+                    {
+                        @for (friendRequest of filterPendingFriendRequests(); track friendRequest)
+                        {
+                            <nz-list-item>
+                                <p>You received a friend request from {{friendRequest.senderDisplayName}}</p>
+
+                                <button nz-button nzType="primary" nzShape="circle" nzSize="small" (click)="updateFriendRequests(friendRequest, FriendRequestStatus.Accepted)">
+                                    <span nz-icon nzType="check" nzTheme="outline"></span>
+                                </button>
+
+                                <button nz-button nzType="primary" nzShape="circle" nzSize="small" nzDanger (click)="updateFriendRequests(friendRequest, FriendRequestStatus.Refused)">
+                                    <span nz-icon nzType="close" nzTheme="outline"></span>
+                                </button>
+                            </nz-list-item>
+                        }
+                    }
+                </nz-list>
+            </nz-tab>
+            <nz-tab nzTitle="Friends">
+                <nz-list nzBordered nzHeader="Friend Requests">
+                    @if (filterAcceptedFriendRequests().length === 0)
+                    {
+                        <nz-list-empty />
+                    }
+                    @else
+                    {
+                        @for (friendRequest of filterAcceptedFriendRequests(); track friendRequest)
+                        {
+                            <nz-list-item>
+                                <p>You are friends with {{friendRequest.senderDisplayName}}</p>
+
+                                <button nz-button nzType="primary" nzShape="circle" nzSize="small" nzDanger (click)="updateFriendRequests(friendRequest, FriendRequestStatus.Refused)">
+                                    <span nz-icon nzType="close" nzTheme="outline"></span>
+                                </button>
+                            </nz-list-item>
+                        }
+                    }
+                </nz-list>
+            </nz-tab>
+            <nz-tab nzTitle="Blocked">
+                <nz-list nzBordered nzHeader="Friend Requests">
+                    @if (filterRefusedFriendRequests().length === 0)
+                    {
+                        <nz-list-empty />
+                    }
+                    @else
+                    {
+                        @for (friendRequest of filterRefusedFriendRequests(); track friendRequest)
+                        {
+                            <nz-list-item>
+                                <p>You blocked {{friendRequest.senderDisplayName}}</p>
+
+                                <button nz-button nzType="primary" nzShape="circle" nzSize="small" (click)="updateFriendRequests(friendRequest, FriendRequestStatus.Accepted)">
+                                    <span nz-icon nzType="check" nzTheme="outline"></span>
+                                </button>
+                            </nz-list-item>
+                        }
+                    }
+                </nz-list>
+            </nz-tab>
+            <nz-tab nzTitle="Personal Posts">
+                <app-feed [user]="user" [ownPosts]="true" [editablePosts]="true"></app-feed>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+}
+@else
+{
+   <nz-empty></nz-empty>
+}

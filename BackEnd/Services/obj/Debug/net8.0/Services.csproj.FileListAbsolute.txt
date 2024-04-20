@@ -1,0 +1,15 @@
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\bin\Debug\net8.0\Services.deps.json
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\bin\Debug\net8.0\Services.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\bin\Debug\net8.0\Services.pdb
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\bin\Debug\net8.0\Database.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\bin\Debug\net8.0\Database.pdb
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.csproj.AssemblyReference.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.AssemblyInfoInputs.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.AssemblyInfo.cs
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.csproj.CoreCompileInputs.cache
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.csproj.Up2Date
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\refint\Services.dll
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\Services.pdb
+C:\Andrei\Facultate\PW\PWProject\BackEnd\Services\obj\Debug\net8.0\ref\Services.dll

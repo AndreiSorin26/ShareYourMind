@@ -1,0 +1,121 @@
+@if(user?.role === 'Admin')
+{
+    <nz-select [(ngModel)]="selectedFeedbackType">
+        @for(feedbackType of feedbackTypes; track feedbackType)
+        {
+            <nz-option [nzValue]="feedbackType" [nzLabel]="feedbackType"></nz-option>
+        }
+    </nz-select>
+
+    <nz-date-picker [(ngModel)]="startDate"></nz-date-picker>
+    ->
+    <nz-date-picker [(ngModel)]="endDate"></nz-date-picker>
+
+    <button nz-button nzType="primary" nzShape="circle" [nzLoading]="gettingFeedbacks" (click)="reloadFeedbacks()">
+        <span nz-icon nzType="reload" nzTheme="outline"></span>
+    </button>
+
+    <nz-divider></nz-divider>
+
+    @if(feedbacks.length > 0)
+    {
+        <nz-list nzItemLayout="vertical">
+            @for (feedback of feedbacks; track feedback)
+            {
+                <nz-list-item>
+                    <nz-list-item-meta>
+                        <nz-list-item-meta-avatar nzSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFLHz0vltSz4jyrQ5SmjyKiVAF-xjpuoHcCw&usqp=CAU"></nz-list-item-meta-avatar>
+                        <nz-list-item-meta-title>
+                            <a href="">{{feedback.userDisplayName}}</a>
+                        </nz-list-item-meta-title>
+                        <nz-list-item-meta-description>
+                            {{ feedback.createdAt | date: 'dd MMMM, yyyy' }}
+                        </nz-list-item-meta-description>
+                    </nz-list-item-meta>
+
+                    <p>
+                        {{ feedback.text }}
+                    </p>
+
+                    <p class="label">UI: </p>
+                    <nz-rate [ngModel]="feedback.uiRating" [nzCharacter]="characterIcon"></nz-rate>
+                    <br/>
+
+                    <p class="label">UX:</p>
+                    <nz-rate [ngModel]="feedback.uxRating" [nzCharacter]="characterIcon"></nz-rate>
+                    <br/>
+
+                    <p class="label">Community:</p>
+                    <nz-rate [ngModel]="feedback.communityRating" [nzCharacter]="characterIcon"></nz-rate>
+                    <br/>
+
+                    <p class="label">Data flow:</p>
+                    <nz-rate [ngModel]="feedback.dataFlowRating" [nzCharacter]="characterIcon"></nz-rate>
+                    <br/>
+
+                    <nz-list-item-extra>
+                        <img width="1" height="1" alt="logo" ngSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png"/>
+                    </nz-list-item-extra>
+                </nz-list-item>
+            }
+        </nz-list>
+    }
+
+    @if(feedbackMetrics.length > 0)
+    {
+        <div class="spaced-items">
+            @for(metric of getTypeFeedbackMetrics('Average'); track metric)
+            {
+                <nz-statistic [nzValue]="(metric.value | number)!" [nzTitle]="'Average for ' + metric.name"></nz-statistic>
+            }
+        </div>
+        <nz-divider></nz-divider>
+        <div class="spaced-items">
+            @for(content of ['UI', 'UX', 'Community', 'DataFlow']; track content)
+            {
+                <div class="in-block">
+                    <p-chart type="pie" [data]="makePieChartData(content)" [options]="pieChartOptions" width="200" height="200"></p-chart>
+                </div>
+            }
+        </div>
+    }
+}
+@else
+{
+    <textarea rows="4" placeholder="Enter general impression" nz-input [(ngModel)]="newFeedback.text"></textarea>
+
+    <nz-divider></nz-divider>
+
+    <p class="label">Rate the UI appearance:</p>
+    <nz-rate [(ngModel)]="newFeedback.uiRating" [nzCharacter]="characterIcon"></nz-rate>
+    <br/>
+
+    <p class="label">Rate the UX experience:</p>
+    <nz-rate [(ngModel)]="newFeedback.uxRating" [nzCharacter]="characterIcon"></nz-rate>
+    <br/>
+
+    <p class="label">Rate the community of this site:</p>
+    <nz-rate [(ngModel)]="newFeedback.communityRating" [nzCharacter]="characterIcon"></nz-rate>
+    <br/>
+
+    <p class="label">Rate the data flow of the website:</p>
+    <nz-rate [(ngModel)]="newFeedback.dataFlowRating" [nzCharacter]="characterIcon"></nz-rate>
+    <br/>
+
+    <nz-divider></nz-divider>
+
+    <button nz-button nzType="primary" nzShape="round" [nzLoading]="postingFeedback" (click)="postFeedback()">
+        <span nz-icon nzType="audit" nzTheme="outline"></span>
+        Post feedback
+    </button>
+}
+
+<ng-template #characterIcon let-index>
+    <ng-container [ngSwitch]="index">
+        <span nz-icon nzType="frown" *ngSwitchCase="0"></span>
+        <span nz-icon nzType="frown" *ngSwitchCase="1"></span>
+        <span nz-icon nzType="meh" *ngSwitchCase="2"></span>
+        <span nz-icon nzType="smile" *ngSwitchCase="3"></span>
+        <span nz-icon nzType="smile" *ngSwitchCase="4"></span>
+    </ng-container>
+</ng-template>
