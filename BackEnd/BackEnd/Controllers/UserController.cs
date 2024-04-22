@@ -2,11 +2,11 @@
 using Services.Exceptions;
 using Services.Interfaces;
 using Services.DTOs;
+using Database.Entities.Enums;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Database.Entities.Enums;
 
 namespace BackEnd.Controllers
 {

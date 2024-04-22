@@ -1,6 +1,4 @@
-﻿using Database.Entities.Enums;
-
-namespace Services.DTOs.EntityMappings
+﻿namespace Services.DTOs.EntityMappings
 {
     public class PostDTO : BaseEntityDTO
     {

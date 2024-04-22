@@ -1,5 +1,4 @@
 ﻿using Database.Entities;
-using Database.Entities.Enums;
 
 namespace Database.Repositories.Interfaces
 {

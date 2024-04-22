@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Services.DTOs;
+﻿using Services.DTOs;
 using Services.DTOs.EntityMappings;
 using Services.Exceptions;
 using Services.Services.Interfaces;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace BackEnd.Controllers

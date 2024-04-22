@@ -2,12 +2,11 @@
 using Services.Services.Interfaces;
 using Services.Exceptions;
 using Services.DTOs;
-using System.Security.Claims;
 using Services.Interfaces;
 
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Services.Implementations;
 
 namespace BackEnd.Controllers
 {

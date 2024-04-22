@@ -1,11 +1,10 @@
-﻿using AutoMapper;
-using Database.Entities;
-using Database.Repositories.Implementations;
+﻿using Database.Entities;
 using Database.Repositories.Interfaces;
 using Services.DTOs;
 using Services.DTOs.EntityMappings;
-using Services.Exceptions;
 using Services.Services.Interfaces;
+
+using AutoMapper;
 
 namespace Services.Services.Implementations
 {

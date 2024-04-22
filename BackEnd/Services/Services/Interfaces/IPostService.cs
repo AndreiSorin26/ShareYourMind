@@ -1,5 +1,4 @@
-﻿using Database.Entities;
-using Services.DTOs;
+﻿using Services.DTOs;
 using Services.DTOs.EntityMappings;
 
 namespace Services.Interfaces

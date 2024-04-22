@@ -25,7 +25,7 @@ namespace BackEnd
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "PW Project API", Version = "v1.0" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PW Project API", Version = "v1.0" });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
